@@ -1,0 +1,14 @@
+public enum STATE
+{
+	INIT,
+	START,
+	DAMAGE,
+	DOWN,
+	CLEAR,
+	OVER,
+	PAUSE,
+	RESUME,
+	LOAD,
+	IDLE,
+	WAIT
+}

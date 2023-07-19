@@ -1,0 +1,651 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class LevelDesign : MonoBehaviour
+{
+	private static LevelDesign instance;
+
+	public Dictionary<int, string> stage1 = new Dictionary<int, string>();
+
+	public Dictionary<int, string> stage2 = new Dictionary<int, string>();
+
+	public Dictionary<int, string> stage3 = new Dictionary<int, string>();
+
+	public Dictionary<int, string> stage4 = new Dictionary<int, string>();
+
+	public BlockMaterial[] blockMaterial = new BlockMaterial[10];
+
+	public BasicWeaponOption[] basicWeaponOption = new BasicWeaponOption[3];
+
+	public DifficultDesign difficultDesign;
+
+	public List<EventDrop> eventDrop = new List<EventDrop>();
+
+	public List<KillReward> killReward = new List<KillReward>();
+
+	public List<killRewardTier> rewardTier = new List<killRewardTier>();
+
+	public List<DropItem> dropItem = new List<DropItem>();
+
+	public static LevelDesign Instance
+	{
+		get
+		{
+			if (instance == null)
+			{
+				instance = GameObject.Find("_LevelDesign").GetComponent<LevelDesign>();
+			}
+			return instance;
+		}
+	}
+
+	private void OnApplicationQuit()
+	{
+		instance = null;
+	}
+
+	private void Awake()
+	{
+		Object.DontDestroyOnLoad(base.gameObject);
+	}
+
+	public void LoadLevelDesignVal(int lv)
+	{
+		switch (lv)
+		{
+		case 0:
+			difficultDesign.difficultLevel = lv;
+			difficultDesign.goldDrop = 0.5f;
+			difficultDesign.itemDrop = 1f;
+			difficultDesign.healthPow = 0.7f;
+			difficultDesign.enemyAI = 1f;
+			difficultDesign.enemyMoveSpdPow = 0f;
+			break;
+		case 1:
+			difficultDesign.difficultLevel = lv;
+			difficultDesign.goldDrop = 1f;
+			difficultDesign.itemDrop = 1.5f;
+			difficultDesign.healthPow = 1f;
+			difficultDesign.enemyAI = 0.7f;
+			difficultDesign.enemyMoveSpdPow = 0.13f;
+			break;
+		case 2:
+			difficultDesign.difficultLevel = lv;
+			difficultDesign.goldDrop = 1.5f;
+			difficultDesign.itemDrop = 2f;
+			difficultDesign.healthPow = 1.5f;
+			difficultDesign.enemyAI = 0.5f;
+			difficultDesign.enemyMoveSpdPow = 0.25f;
+			break;
+		}
+	}
+
+	public void LoadLevelDesign()
+	{
+		//um...
+		//yeah uh
+		//uh
+		//just
+		//speechless here
+		//a bit
+		ImportData(1, 0, "e002");
+		ImportData(1, 1, "e002");
+		ImportData(1, 2, "e002");
+		ImportData(1, 3, "e002");
+		ImportData(1, 4, "e002");
+		ImportData(1, 5, "e002");
+		ImportData(1, 6, "e001");
+		ImportData(1, 7, "e001");
+		ImportData(1, 8, "e003");
+		ImportData(1, 9, "e001");
+		ImportData(1, 10, "e003");
+		ImportData(1, 11, "e003");
+		ImportData(1, 12, "e001");
+		ImportData(1, 13, "e002");
+		ImportData(1, 14, "e003");
+		ImportData(1, 15, "e004");
+		ImportData(1, 16, "e001");
+		ImportData(1, 17, "e003");
+		ImportData(1, 18, "e003");
+		ImportData(1, 19, "e004");
+		ImportData(1, 20, "e003");
+		ImportData(1, 21, "e001");
+		ImportData(1, 22, "e002");
+		ImportData(1, 23, "e003");
+		ImportData(1, 24, "e017");
+		ImportData(1, 25, "e005");
+		ImportData(1, 26, "e005");
+		ImportData(1, 27, "e005");
+		ImportData(1, 28, "e006");
+		ImportData(1, 29, "e005");
+		ImportData(1, 30, "e005");
+		ImportData(1, 31, "e005");
+		ImportData(1, 32, "e006");
+		ImportData(1, 33, "e007");
+		ImportData(1, 34, "e005");
+		ImportData(1, 35, "e006");
+		ImportData(1, 36, "e007");
+		ImportData(1, 37, "e008");
+		ImportData(1, 38, "e006");
+		ImportData(1, 39, "e006");
+		ImportData(1, 40, "e007");
+		ImportData(1, 41, "e008");
+		ImportData(1, 42, "e007");
+		ImportData(1, 43, "e005");
+		ImportData(1, 44, "e006");
+		ImportData(1, 45, "e017");
+		ImportData(1, 46, "e008");
+		ImportData(1, 47, "e007");
+		ImportData(1, 48, "e008");
+		ImportData(1, 49, "e019");
+		ImportData(1, 50, "e008");
+		ImportData(1, 51, "e008");
+		ImportData(1, 52, "e008");
+		ImportData(1, 53, "e008");
+		ImportData(1, 54, "e009");
+		ImportData(1, 55, "e008");
+		ImportData(1, 56, "e008");
+		ImportData(1, 57, "e008");
+		ImportData(1, 58, "e009");
+		ImportData(1, 59, "e008");
+		ImportData(1, 60, "e008");
+		ImportData(1, 61, "e009");
+		ImportData(1, 62, "e010");
+		ImportData(1, 63, "e009");
+		ImportData(1, 64, "e008");
+		ImportData(1, 65, "e009");
+		ImportData(1, 66, "e010");
+		ImportData(1, 67, "e011");
+		ImportData(1, 68, "e011");
+		ImportData(1, 69, "e018");
+		ImportData(1, 70, "e011");
+		ImportData(1, 71, "e009");
+		ImportData(1, 72, "e010");
+		ImportData(1, 73, "e011");
+		ImportData(1, 74, "e019");
+		ImportData(1, 75, "e012");
+		ImportData(1, 76, "e012");
+		ImportData(1, 77, "e012");
+		ImportData(1, 78, "e012");
+		ImportData(1, 79, "e013");
+		ImportData(1, 80, "e012");
+		ImportData(1, 81, "e012");
+		ImportData(1, 82, "e013");
+		ImportData(1, 83, "e013");
+		ImportData(1, 84, "e019");
+		ImportData(1, 85, "e013");
+		ImportData(1, 86, "e014");
+		ImportData(1, 87, "e015");
+		ImportData(1, 88, "e014");
+		ImportData(1, 89, "e015");
+		ImportData(1, 90, "e014");
+		ImportData(1, 91, "e015");
+		ImportData(1, 92, "e015");
+		ImportData(1, 93, "e012");
+		ImportData(1, 94, "e013");
+		ImportData(1, 95, "e014");
+		ImportData(1, 96, "e015");
+		ImportData(1, 97, "e014");
+		ImportData(1, 98, "e015");
+		ImportData(1, 99, "e018");
+		ImportData(1, 100, "e016");
+		ImportData(1, 101, "e015");
+		ImportData(1, 102, "e014");
+		ImportData(1, 103, "e015");
+		ImportData(1, 104, "e016");
+		ImportData(1, 105, "e015");
+		ImportData(1, 106, "e015");
+		ImportData(1, 107, "e014");
+		ImportData(1, 108, "e014");
+		ImportData(1, 109, "e015");
+		ImportData(1, 110, "e016");
+		ImportData(1, 111, "e016");
+		ImportData(1, 112, "e012");
+		ImportData(1, 113, "e012");
+		ImportData(1, 114, "e013");
+		ImportData(1, 115, "e014");
+		ImportData(1, 116, "e014");
+		ImportData(1, 117, "e015");
+		ImportData(1, 118, "e013");
+		ImportData(1, 119, "e014");
+		ImportData(1, 120, "e014");
+		ImportData(1, 121, "e015");
+		ImportData(1, 122, "e016");
+		ImportData(1, 123, "e012");
+		ImportData(1, 124, "e020");
+		ImportData(1, 125, "e015");
+		ImportData(1, 126, "e014");
+		ImportData(1, 127, "e013");
+		ImportData(1, 128, "e015");
+		ImportData(1, 129, "e016");
+		ImportData(1, 130, "e015");
+		ImportData(1, 131, "e016");
+		ImportData(1, 132, "e015");
+		ImportData(1, 133, "e014");
+		ImportData(1, 134, "e018");
+		ImportData(2, 0, "e021");
+		ImportData(2, 1, "e022");
+		ImportData(2, 2, "e022");
+		ImportData(2, 3, "e023");
+		ImportData(2, 4, "e021");
+		ImportData(2, 5, "e023");
+		ImportData(2, 6, "e023");
+		ImportData(2, 7, "e021");
+		ImportData(2, 8, "e022");
+		ImportData(2, 9, "e023");
+		ImportData(2, 10, "e024");
+		ImportData(2, 11, "e021");
+		ImportData(2, 12, "e023");
+		ImportData(2, 13, "e023");
+		ImportData(2, 14, "e024");
+		ImportData(2, 15, "e023");
+		ImportData(2, 16, "e021");
+		ImportData(2, 17, "e022");
+		ImportData(2, 18, "e023");
+		ImportData(2, 19, "e037");
+		ImportData(2, 20, "e022");
+		ImportData(2, 21, "e025");
+		ImportData(2, 22, "e025");
+		ImportData(2, 23, "e026");
+		ImportData(2, 24, "e025");
+		ImportData(2, 25, "e025");
+		ImportData(2, 26, "e025");
+		ImportData(2, 27, "e026");
+		ImportData(2, 28, "e027");
+		ImportData(2, 29, "e025");
+		ImportData(2, 30, "e026");
+		ImportData(2, 31, "e027");
+		ImportData(2, 32, "e028");
+		ImportData(2, 33, "e026");
+		ImportData(2, 34, "e026");
+		ImportData(2, 35, "e027");
+		ImportData(2, 36, "e028");
+		ImportData(2, 37, "e027");
+		ImportData(2, 38, "e025");
+		ImportData(2, 39, "e026");
+		ImportData(2, 40, "e037");
+		ImportData(2, 41, "e028");
+		ImportData(2, 42, "e027");
+		ImportData(2, 43, "e028");
+		ImportData(2, 44, "e039");
+		ImportData(2, 45, "e028");
+		ImportData(2, 46, "e028");
+		ImportData(2, 47, "e028");
+		ImportData(2, 48, "e028");
+		ImportData(2, 49, "e029");
+		ImportData(2, 50, "e028");
+		ImportData(2, 51, "e028");
+		ImportData(2, 52, "e028");
+		ImportData(2, 53, "e029");
+		ImportData(2, 54, "e028");
+		ImportData(2, 55, "e028");
+		ImportData(2, 56, "e029");
+		ImportData(2, 57, "e030");
+		ImportData(2, 58, "e029");
+		ImportData(2, 59, "e028");
+		ImportData(2, 60, "e029");
+		ImportData(2, 61, "e030");
+		ImportData(2, 62, "e031");
+		ImportData(2, 63, "e031");
+		ImportData(2, 64, "e038");
+		ImportData(2, 65, "e031");
+		ImportData(2, 66, "e029");
+		ImportData(2, 67, "e030");
+		ImportData(2, 68, "e031");
+		ImportData(2, 69, "e039");
+		ImportData(2, 70, "e032");
+		ImportData(2, 71, "e032");
+		ImportData(2, 72, "e032");
+		ImportData(2, 73, "e032");
+		ImportData(2, 74, "e033");
+		ImportData(2, 75, "e032");
+		ImportData(2, 76, "e032");
+		ImportData(2, 77, "e033");
+		ImportData(2, 78, "e033");
+		ImportData(2, 79, "e039");
+		ImportData(2, 80, "e033");
+		ImportData(2, 81, "e034");
+		ImportData(2, 82, "e035");
+		ImportData(2, 83, "e034");
+		ImportData(2, 84, "e035");
+		ImportData(2, 85, "e034");
+		ImportData(2, 86, "e035");
+		ImportData(2, 87, "e035");
+		ImportData(2, 88, "e032");
+		ImportData(2, 89, "e033");
+		ImportData(2, 90, "e034");
+		ImportData(2, 91, "e035");
+		ImportData(2, 92, "e034");
+		ImportData(2, 93, "e035");
+		ImportData(2, 94, "e038");
+		ImportData(2, 95, "e036");
+		ImportData(2, 96, "e035");
+		ImportData(2, 97, "e034");
+		ImportData(2, 98, "e035");
+		ImportData(2, 99, "e036");
+		ImportData(2, 100, "e035");
+		ImportData(2, 101, "e035");
+		ImportData(2, 102, "e034");
+		ImportData(2, 103, "e034");
+		ImportData(2, 104, "e035");
+		ImportData(2, 105, "e036");
+		ImportData(2, 106, "e036");
+		ImportData(2, 107, "e032");
+		ImportData(2, 108, "e032");
+		ImportData(2, 109, "e033");
+		ImportData(2, 110, "e034");
+		ImportData(2, 111, "e034");
+		ImportData(2, 112, "e035");
+		ImportData(2, 113, "e033");
+		ImportData(2, 114, "e034");
+		ImportData(2, 115, "e034");
+		ImportData(2, 116, "e035");
+		ImportData(2, 117, "e036");
+		ImportData(2, 118, "e032");
+		ImportData(2, 119, "e020");
+		ImportData(2, 120, "e035");
+		ImportData(2, 121, "e034");
+		ImportData(2, 122, "e033");
+		ImportData(2, 123, "e035");
+		ImportData(2, 124, "e036");
+		ImportData(2, 125, "e035");
+		ImportData(2, 126, "e036");
+		ImportData(2, 127, "e035");
+		ImportData(2, 128, "e034");
+		ImportData(2, 129, "e038");
+		ImportData(2, 130, "e035");
+		ImportData(2, 131, "e036");
+		ImportData(2, 132, "e039");
+		ImportData(2, 133, "e034");
+		ImportData(2, 134, "e040");
+		ImportData(3, 0, "e041");
+		ImportData(3, 1, "e042");
+		ImportData(3, 2, "e042");
+		ImportData(3, 3, "e043");
+		ImportData(3, 4, "e041");
+		ImportData(3, 5, "e043");
+		ImportData(3, 6, "e043");
+		ImportData(3, 7, "e041");
+		ImportData(3, 8, "e042");
+		ImportData(3, 9, "e043");
+		ImportData(3, 10, "e044");
+		ImportData(3, 11, "e041");
+		ImportData(3, 12, "e043");
+		ImportData(3, 13, "e043");
+		ImportData(3, 14, "e044");
+		ImportData(3, 15, "e043");
+		ImportData(3, 16, "e041");
+		ImportData(3, 17, "e042");
+		ImportData(3, 18, "e043");
+		ImportData(3, 19, "e057");
+		ImportData(3, 20, "e042");
+		ImportData(3, 21, "e045");
+		ImportData(3, 22, "e045");
+		ImportData(3, 23, "e046");
+		ImportData(3, 24, "e045");
+		ImportData(3, 25, "e045");
+		ImportData(3, 26, "e045");
+		ImportData(3, 27, "e046");
+		ImportData(3, 28, "e047");
+		ImportData(3, 29, "e045");
+		ImportData(3, 30, "e046");
+		ImportData(3, 31, "e047");
+		ImportData(3, 32, "e048");
+		ImportData(3, 33, "e046");
+		ImportData(3, 34, "e046");
+		ImportData(3, 35, "e047");
+		ImportData(3, 36, "e048");
+		ImportData(3, 37, "e047");
+		ImportData(3, 38, "e045");
+		ImportData(3, 39, "e046");
+		ImportData(3, 40, "e057");
+		ImportData(3, 41, "e048");
+		ImportData(3, 42, "e047");
+		ImportData(3, 43, "e048");
+		ImportData(3, 44, "e059");
+		ImportData(3, 45, "e048");
+		ImportData(3, 46, "e048");
+		ImportData(3, 47, "e048");
+		ImportData(3, 48, "e048");
+		ImportData(3, 49, "e049");
+		ImportData(3, 50, "e048");
+		ImportData(3, 51, "e048");
+		ImportData(3, 52, "e048");
+		ImportData(3, 53, "e049");
+		ImportData(3, 54, "e048");
+		ImportData(3, 55, "e048");
+		ImportData(3, 56, "e049");
+		ImportData(3, 57, "e050");
+		ImportData(3, 58, "e049");
+		ImportData(3, 59, "e048");
+		ImportData(3, 60, "e049");
+		ImportData(3, 61, "e050");
+		ImportData(3, 62, "e051");
+		ImportData(3, 63, "e051");
+		ImportData(3, 64, "e058");
+		ImportData(3, 65, "e051");
+		ImportData(3, 66, "e049");
+		ImportData(3, 67, "e050");
+		ImportData(3, 68, "e051");
+		ImportData(3, 69, "e059");
+		ImportData(3, 70, "e052");
+		ImportData(3, 71, "e052");
+		ImportData(3, 72, "e052");
+		ImportData(3, 73, "e052");
+		ImportData(3, 74, "e053");
+		ImportData(3, 75, "e052");
+		ImportData(3, 76, "e052");
+		ImportData(3, 77, "e053");
+		ImportData(3, 78, "e053");
+		ImportData(3, 79, "e059");
+		ImportData(3, 80, "e053");
+		ImportData(3, 81, "e054");
+		ImportData(3, 82, "e055");
+		ImportData(3, 83, "e054");
+		ImportData(3, 84, "e055");
+		ImportData(3, 85, "e054");
+		ImportData(3, 86, "e055");
+		ImportData(3, 87, "e055");
+		ImportData(3, 88, "e052");
+		ImportData(3, 89, "e053");
+		ImportData(3, 90, "e054");
+		ImportData(3, 91, "e055");
+		ImportData(3, 92, "e054");
+		ImportData(3, 93, "e055");
+		ImportData(3, 94, "e058");
+		ImportData(3, 95, "e056");
+		ImportData(3, 96, "e055");
+		ImportData(3, 97, "e054");
+		ImportData(3, 98, "e055");
+		ImportData(3, 99, "e056");
+		ImportData(3, 100, "e055");
+		ImportData(3, 101, "e055");
+		ImportData(3, 102, "e054");
+		ImportData(3, 103, "e054");
+		ImportData(3, 104, "e055");
+		ImportData(3, 105, "e056");
+		ImportData(3, 106, "e056");
+		ImportData(3, 107, "e052");
+		ImportData(3, 108, "e052");
+		ImportData(3, 109, "e053");
+		ImportData(3, 110, "e054");
+		ImportData(3, 111, "e054");
+		ImportData(3, 112, "e055");
+		ImportData(3, 113, "e053");
+		ImportData(3, 114, "e054");
+		ImportData(3, 115, "e054");
+		ImportData(3, 116, "e055");
+		ImportData(3, 117, "e056");
+		ImportData(3, 118, "e052");
+		ImportData(3, 119, "e040");
+		ImportData(3, 120, "e055");
+		ImportData(3, 121, "e054");
+		ImportData(3, 122, "e053");
+		ImportData(3, 123, "e055");
+		ImportData(3, 124, "e056");
+		ImportData(3, 125, "e055");
+		ImportData(3, 126, "e056");
+		ImportData(3, 127, "e058");
+		ImportData(3, 128, "e054");
+		ImportData(3, 129, "e059");
+		ImportData(3, 130, "e053");
+		ImportData(3, 131, "e056");
+		ImportData(3, 132, "e055");
+		ImportData(3, 133, "e054");
+		ImportData(3, 134, "e060");
+		ImportData(4, 0, "e061");
+		ImportData(4, 1, "e062");
+		ImportData(4, 2, "e062");
+		ImportData(4, 3, "e063");
+		ImportData(4, 4, "e061");
+		ImportData(4, 5, "e063");
+		ImportData(4, 6, "e063");
+		ImportData(4, 7, "e061");
+		ImportData(4, 8, "e062");
+		ImportData(4, 9, "e063");
+		ImportData(4, 10, "e064");
+		ImportData(4, 11, "e061");
+		ImportData(4, 12, "e063");
+		ImportData(4, 13, "e063");
+		ImportData(4, 14, "e064");
+		ImportData(4, 15, "e063");
+		ImportData(4, 16, "e061");
+		ImportData(4, 17, "e062");
+		ImportData(4, 18, "e063");
+		ImportData(4, 19, "e077");
+		ImportData(4, 20, "e062");
+		ImportData(4, 21, "e065");
+		ImportData(4, 22, "e065");
+		ImportData(4, 23, "e066");
+		ImportData(4, 24, "e065");
+		ImportData(4, 25, "e065");
+		ImportData(4, 26, "e065");
+		ImportData(4, 27, "e066");
+		ImportData(4, 28, "e067");
+		ImportData(4, 29, "e065");
+		ImportData(4, 30, "e066");
+		ImportData(4, 31, "e067");
+		ImportData(4, 32, "e068");
+		ImportData(4, 33, "e066");
+		ImportData(4, 34, "e066");
+		ImportData(4, 35, "e067");
+		ImportData(4, 36, "e068");
+		ImportData(4, 37, "e067");
+		ImportData(4, 38, "e065");
+		ImportData(4, 39, "e066");
+		ImportData(4, 40, "e077");
+		ImportData(4, 41, "e068");
+		ImportData(4, 42, "e067");
+		ImportData(4, 43, "e068");
+		ImportData(4, 44, "e079");
+		ImportData(4, 45, "e068");
+		ImportData(4, 46, "e068");
+		ImportData(4, 47, "e068");
+		ImportData(4, 48, "e068");
+		ImportData(4, 49, "e069");
+		ImportData(4, 50, "e068");
+		ImportData(4, 51, "e068");
+		ImportData(4, 52, "e068");
+		ImportData(4, 53, "e069");
+		ImportData(4, 54, "e068");
+		ImportData(4, 55, "e068");
+		ImportData(4, 56, "e069");
+		ImportData(4, 57, "e070");
+		ImportData(4, 58, "e069");
+		ImportData(4, 59, "e068");
+		ImportData(4, 60, "e069");
+		ImportData(4, 61, "e070");
+		ImportData(4, 62, "e071");
+		ImportData(4, 63, "e071");
+		ImportData(4, 64, "e078");
+		ImportData(4, 65, "e071");
+		ImportData(4, 66, "e069");
+		ImportData(4, 67, "e070");
+		ImportData(4, 68, "e071");
+		ImportData(4, 69, "e079");
+		ImportData(4, 70, "e072");
+		ImportData(4, 71, "e072");
+		ImportData(4, 72, "e072");
+		ImportData(4, 73, "e072");
+		ImportData(4, 74, "e073");
+		ImportData(4, 75, "e072");
+		ImportData(4, 76, "e072");
+		ImportData(4, 77, "e073");
+		ImportData(4, 78, "e073");
+		ImportData(4, 79, "e079");
+		ImportData(4, 80, "e073");
+		ImportData(4, 81, "e074");
+		ImportData(4, 82, "e075");
+		ImportData(4, 83, "e074");
+		ImportData(4, 84, "e075");
+		ImportData(4, 85, "e074");
+		ImportData(4, 86, "e075");
+		ImportData(4, 87, "e075");
+		ImportData(4, 88, "e072");
+		ImportData(4, 89, "e073");
+		ImportData(4, 90, "e074");
+		ImportData(4, 91, "e075");
+		ImportData(4, 92, "e074");
+		ImportData(4, 93, "e075");
+		ImportData(4, 94, "e078");
+		ImportData(4, 95, "e076");
+		ImportData(4, 96, "e075");
+		ImportData(4, 97, "e074");
+		ImportData(4, 98, "e075");
+		ImportData(4, 99, "e076");
+		ImportData(4, 100, "e075");
+		ImportData(4, 101, "e075");
+		ImportData(4, 102, "e074");
+		ImportData(4, 103, "e074");
+		ImportData(4, 104, "e075");
+		ImportData(4, 105, "e076");
+		ImportData(4, 106, "e076");
+		ImportData(4, 107, "e072");
+		ImportData(4, 108, "e072");
+		ImportData(4, 109, "e073");
+		ImportData(4, 110, "e074");
+		ImportData(4, 111, "e074");
+		ImportData(4, 112, "e075");
+		ImportData(4, 113, "e073");
+		ImportData(4, 114, "e074");
+		ImportData(4, 115, "e074");
+		ImportData(4, 116, "e075");
+		ImportData(4, 117, "e076");
+		ImportData(4, 118, "e072");
+		ImportData(4, 119, "e060");
+		ImportData(4, 120, "e075");
+		ImportData(4, 121, "e074");
+		ImportData(4, 122, "e073");
+		ImportData(4, 123, "e075");
+		ImportData(4, 124, "e076");
+		ImportData(4, 125, "e075");
+		ImportData(4, 126, "e076");
+		ImportData(4, 127, "e075");
+		ImportData(4, 128, "e074");
+		ImportData(4, 129, "e078");
+		ImportData(4, 130, "e075");
+		ImportData(4, 131, "e076");
+		ImportData(4, 132, "e079");
+		ImportData(4, 133, "e074");
+		ImportData(4, 134, "e080");
+	}
+
+	private void ImportData(int _stageNum, int _num, string _monsterName)
+	{
+		switch (_stageNum)
+		{
+		case 1:
+			stage1.Add(_num, _monsterName);
+			break;
+		case 2:
+			stage2.Add(_num, _monsterName);
+			break;
+		case 3:
+			stage3.Add(_num, _monsterName);
+			break;
+		case 4:
+			stage4.Add(_num, _monsterName);
+			break;
+		}
+	}
+}

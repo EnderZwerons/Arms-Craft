@@ -3933,6 +3933,7 @@ GameObject:
   m_Component:
   - component: {fileID: 849}
   - component: {fileID: 1977}
+  - component: {fileID: 1759}
   m_Layer: 8
   m_Name: Label
   m_TagString: Untagged
@@ -31136,6 +31137,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 55, y: 15, z: 1}
   m_Center: {x: 0, y: 5, z: 0}
+--- !u!114 &1759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2a0e1f692860d409c4039f8a65d75c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!104 &1760
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -31447,9 +31460,9 @@ NavMeshSettings:
     serializedVersion: 2
     agentTypeID: 0
     agentRadius: 0.8000001
-    agentHeight: 0.53333336
+    agentHeight: 0.72
     agentSlope: 45
-    agentClimb: 0.40000004
+    agentClimb: 0.7
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -35768,7 +35781,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.5
+  aspectRatio: 2.5833333
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 60f3f3c81d9822e4cbb849ad74dc8fe7, type: 3}
   mFont: {fileID: 0}
@@ -39259,7 +39272,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.1111112
+  aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 60f3f3c81d9822e4cbb849ad74dc8fe7, type: 3}
   mFont: {fileID: 0}
@@ -39704,7 +39717,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8
+  aspectRatio: 8.083333
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 60f3f3c81d9822e4cbb849ad74dc8fe7, type: 3}
   mFont: {fileID: 0}
@@ -41684,7 +41697,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.111111
+  aspectRatio: 4
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 60f3f3c81d9822e4cbb849ad74dc8fe7, type: 3}
   mFont: {fileID: 0}
@@ -41942,7 +41955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12fee4c65d0cd4f45b15754b1d9cd441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scalingStyle: 2
+  scalingStyle: 1
   manualWidth: 1280
   manualHeight: 1024
   minimumHeight: 480

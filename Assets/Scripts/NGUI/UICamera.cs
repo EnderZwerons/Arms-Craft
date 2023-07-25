@@ -617,11 +617,11 @@ public class UICamera : MonoBehaviour
 					if (mLastScheme == ControlScheme.Mouse)
 					{
 #if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
-						Screen.lockCursor = false;
-						Screen.showCursor = true;
+						//Screen.lockCursor = false;
+						//Screen.showCursor = true;
 #else
-						Cursor.lockState = CursorLockMode.None;
-						Cursor.visible = true;
+						//Cursor.lockState = CursorLockMode.None;
+						//Cursor.visible = true;
 #endif
 					}
 #if UNITY_EDITOR
@@ -633,11 +633,11 @@ public class UICamera : MonoBehaviour
 						if (current != null && current.autoHideCursor)
 						{
 #if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
-							Screen.showCursor = false;
-							Screen.lockCursor = true;
+							//Screen.showCursor = false;
+							//Screen.lockCursor = true;
 #else
-							Cursor.visible = false;
-							Cursor.lockState = CursorLockMode.Locked;
+							//Cursor.visible = false;
+							//Cursor.lockState = CursorLockMode.Locked;
 #endif
 							// Skip the next 2 frames worth of mouse movement
 							mMouse[0].ignoreDelta = 2;

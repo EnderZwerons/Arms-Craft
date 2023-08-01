@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour
 
 	public float spawnRateEnemy;
 
-	public int spawnRateItem;
+	public float spawnRateItem = 10f;
 
 	private float spawnTimeEnemy;
 
@@ -47,11 +47,25 @@ public class Spawner : MonoBehaviour
 
 	private float moveSpdPow;
 
+	private bool canSpawnRandom;
+
+	private int spawnRandomPause, difficultyIncreaseCurrent;
+
+	public int difficultyIncrease = 30, enemySpawnIncrease = 2, specialEnemyChance = 10, specialEnemyChanceIncrease = 1;
+
+	public float spawnRateDiffIncrease = 0.95f, spawnRateItemDiffIncrease = 0.9f, enemyMoveSpeedDiffIncrease = 1.05f, enemyHealthDiffIncrease = 1.05f, 
+	itemDropDiffIncrease = 1.1f, goldDropDiffIncrease = 1.2f, enemyAttackSpeedDiffIncrease = 1.03f;
+
 	public GameObject[] itemPack = new GameObject[2];
 
 	public List<DropInfo> dropInfo = new List<DropInfo>();
 
-	public static Spawner Inatance
+	private List<float> difficultyMults = new List<float>
+	{
+		1f, 1.05f, 1.15f
+	};
+
+	public static Spawner Instance
 	{
 		get
 		{
@@ -164,18 +178,61 @@ public class Spawner : MonoBehaviour
 		{
 			StartCoroutine("SpawnEnemyRoutine");
 			spawnNumEnemy++;
+			spawnRandomPause++;
 			if (spawnNumEnemy > 134)
 			{
+				canSpawnRandom = true;
 				spawnNumEnemy = 100;
+			}
+			difficultyIncreaseCurrent++;
+			if (difficultyIncreaseCurrent >= difficultyIncrease)
+			{
+				difficultyIncreaseCurrent = 0;
+				enemyLimit += enemySpawnIncrease;
+				spawnRateEnemy *= spawnRateDiffIncrease * difficultyMults[LevelDesign.Instance.difficultDesign.difficultLevel];
+				spawnRateItem *= spawnRateItemDiffIncrease * difficultyMults[LevelDesign.Instance.difficultDesign.difficultLevel];
+				goldDrop *= goldDropDiffIncrease * difficultyMults[LevelDesign.Instance.difficultDesign.difficultLevel];
+				healthPow *= enemyHealthDiffIncrease * difficultyMults[LevelDesign.Instance.difficultDesign.difficultLevel];
+				monsterAI *= enemyAttackSpeedDiffIncrease * difficultyMults[LevelDesign.Instance.difficultDesign.difficultLevel];
+				moveSpdPow *= enemyMoveSpeedDiffIncrease * difficultyMults[LevelDesign.Instance.difficultDesign.difficultLevel];
+				specialEnemyChance -= specialEnemyChanceIncrease;
 			}
 			spawnTimeEnemy = Time.time + spawnRateEnemy;
 		}
 		enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
 	}
 
+	private void SpawnSpecialEnemy(EnemyController enemy)
+	{
+		SPECIALENEMY enemyType = SpecialEnemyData.GetRandomSpecialEnemy;
+		Color color = SpecialEnemyData.SpecialColors[enemyType];
+		SpecialEnemyData.EnemyData data = SpecialEnemyData.SpecialStats[enemyType];
+		SkinnedMeshRenderer renderer = enemy.GetComponentInChildren<SkinnedMeshRenderer>();
+		Texture original = renderer.sharedMaterial.mainTexture;
+		renderer.sharedMaterial = new Material(renderer.sharedMaterial.shader);
+		renderer.sharedMaterial.SetColor("_Color", color);
+		renderer.sharedMaterial.mainTexture = original;
+		enemy.health *= data.health;
+		enemy.damage *= data.damage;
+		enemy.attackSpeed *= data.attackSpeed;
+		enemy.moveSpeed *= data.moveSpeed;
+		enemy.chargeRange *= data.chargeRange;
+		enemy.attackRange *= data.attackRange;
+		enemy.goldAmt *= data.goldDrop;
+		enemy.dropTier = Mathf.FloorToInt((float)enemy.dropTier * data.itemDrop);
+		enemy.transform.localScale *= data.scale;
+		enemy.mainMaterial = renderer.sharedMaterial;
+	}
+
 	private IEnumerator SpawnEnemyRoutine()
 	{
-		string enemyName = curStage[spawnNumEnemy];
+		bool spawnRandom = false;
+		if (spawnRandomPause > 5)
+		{
+			spawnRandomPause = 0;
+			spawnRandom = canSpawnRandom;
+		}
+		string enemyName = curStage[spawnRandom ? BetterRandom.Range(0, 134) : spawnNumEnemy];
 		int num = EnemyObjectName(enemyName);
 		GameObject monsterObject = EnemyObjects.Instance.enemyObject[num];
 		int rnd = Random.Range(0, spawnPoint.Count);
@@ -186,6 +243,10 @@ public class Spawner : MonoBehaviour
 		monsterController.health *= healthPow;
 		monsterController.attackSpeed *= monsterAI;
 		monsterController.moveSpeed += monsterController.moveSpeed * moveSpdPow;
+		if (BetterRandom.GetBool(Mathf.Clamp(specialEnemyChance - LevelDesign.Instance.difficultDesign.difficultLevel, 0, specialEnemyChance)))
+		{
+			SpawnSpecialEnemy(monsterController);
+		}
 		yield return null;
 	}
 
@@ -194,7 +255,7 @@ public class Spawner : MonoBehaviour
 		if (GameManager.Instance.kill >= spawnCountItem)
 		{
 			StartCoroutine("SpawnItemRoutine");
-			spawnCountItem = GameManager.Instance.kill + spawnRateItem;
+			spawnCountItem = GameManager.Instance.kill + Mathf.FloorToInt(spawnRateItem);
 		}
 	}
 
@@ -217,7 +278,6 @@ public class Spawner : MonoBehaviour
 
 	private int EnemyObjectName(string name)
 	{
-		int num = 0;
 		return int.Parse(name.Substring(1, 3)) - 1;
 	}
 

@@ -12,19 +12,7 @@ public class EnemyController : MonoBehaviour
 		IDLE
 	}
 
-	private enum ANIM
-	{
-		IDLE,
-		MOVE,
-		ATTACK,
-		DEATH,
-		DEATHHEAD,
-		NONE
-	}
-
 	private STATE state;
-
-	private ANIM anim;
 
 	private FPSController fpsController;
 
@@ -64,7 +52,7 @@ public class EnemyController : MonoBehaviour
 
 	private float moveTime;
 
-	private Material mainMaterial;
+	[HideInInspector] public Material mainMaterial;
 
 	private Vector2 normalColor = new Vector2(0f, 0f);
 
@@ -112,7 +100,6 @@ public class EnemyController : MonoBehaviour
 		target = GameObject.FindWithTag("Player").transform;
 		myTransform = base.transform;
 		fpsController = target.GetComponent<FPSController>();
-		agent.speed = moveSpeed * 2f;
 		damageAngle.damage = damage;
 		enemyAnim[attackAnim].layer = 1;
 		if (tracker)
@@ -130,6 +117,7 @@ public class EnemyController : MonoBehaviour
 		if (!isDeath)
 		{
 			dist = Vector3.Distance(myTransform.position, target.position);
+			agent.speed = moveSpeed * 2f;
 			if (GameManager.Instance.isDown)
 			{
 				SearchTaret();
@@ -183,7 +171,8 @@ public class EnemyController : MonoBehaviour
 
 	private void AnimDeath()
 	{
-		if (Random.Range(0, 2) == 0)
+		enemyAnim.Stop();
+		if (BetterRandom.RandomBool)
 		{
 			enemyAnim.Play(death1Anim);
 		}
@@ -195,6 +184,7 @@ public class EnemyController : MonoBehaviour
 
 	private void AnimDeathHead()
 	{
+		enemyAnim.Stop();
 		enemyAnim.Play(deathHeadAnim);
 	}
 
@@ -304,7 +294,7 @@ public class EnemyController : MonoBehaviour
 			trans = myTransform,
 			tier = dropTier
 		};
-		StartCoroutine(Spawner.Inatance.EnemyItemDrop(itemDrop));
+		StartCoroutine(Spawner.Instance.EnemyItemDrop(itemDrop));
 		yield return new WaitForSeconds(5f);
 		Object.Destroy(base.gameObject);
 	}

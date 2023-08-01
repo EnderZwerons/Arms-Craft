@@ -409,9 +409,9 @@ public class MainManager : MonoBehaviour
 		while (!async.isDone)
 		{
 			yield return new WaitForSeconds(0.05f);
-			loadSprite.spriteName = "b00" + num;
+			loadSprite.spriteName = num == 10 ? "b010" : "b00" + num;
 			num++;
-			if (num > 9)
+			if (num > 10)
 			{
 				num = 1;
 			}

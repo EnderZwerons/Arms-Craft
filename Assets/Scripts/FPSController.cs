@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Easing;
 
 [RequireComponent(typeof(CharacterController))]
 public class FPSController : MonoBehaviour
@@ -158,6 +159,8 @@ public class FPSController : MonoBehaviour
 	public Transform grenadePos;
 
 	public float grenadeForce;
+
+	public Vector2 bobMult = new Vector2(0.05f, 0.1f), bobSpeed = new Vector2(0.5f, 0.25f);
 
 	public void InitPlayerState()
 	{
@@ -334,7 +337,7 @@ public class FPSController : MonoBehaviour
 			moveDirection *= moveSpeed;
 			if (moveDirection != Vector3.zero)
 			{
-				playerAnim.CrossFade("Run");
+				playerAnim.transform.localPosition = Vector3.Lerp(playerAnim.transform.localPosition, new Vector3(-((EaseInOut.Sine((bobSpeed.y * moveSpeed) * Time.time) * bobMult.y) - (0.5f * bobMult.y)), EaseInOut.Sine((bobSpeed.x * moveSpeed) * Time.time) * bobMult.x, 0), (Mathf.Max(bobSpeed.x, bobSpeed.y) * 20f) * Time.deltaTime);
 			}
 			if (isJump)
 			{

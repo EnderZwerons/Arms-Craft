@@ -214,7 +214,7 @@ public class Spawner : MonoBehaviour
 		renderer.sharedMaterial.mainTexture = original;
 		enemy.health *= data.health;
 		enemy.damage *= data.damage;
-		enemy.attackSpeed *= data.attackSpeed;
+		enemy.attackSpeed /= data.attackSpeed;
 		enemy.moveSpeed *= data.moveSpeed;
 		enemy.chargeRange *= data.chargeRange;
 		enemy.attackRange *= data.attackRange;

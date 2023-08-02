@@ -395,10 +395,14 @@ public class FPSController : MonoBehaviour
 			}
 			if (Input.GetKeyDown(KeyCode.Alpha1))
 			{
+				DisableMuzzle();
+				muzzleTimer = 0f;
 				GameManager.Instance.WeaponChangeForPC(true);
 			}
 			else if (Input.GetKeyDown(KeyCode.Alpha2))
 			{
+				DisableMuzzle();
+				muzzleTimer = 0f;
 				GameManager.Instance.WeaponChangeForPC(false);
 			}
 		}

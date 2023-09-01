@@ -243,7 +243,7 @@ public class Spawner : MonoBehaviour
 		monsterController.health *= healthPow;
 		monsterController.attackSpeed *= monsterAI;
 		monsterController.moveSpeed += monsterController.moveSpeed * moveSpdPow;
-		if (BetterRandom.GetBool(Mathf.Clamp(specialEnemyChance - LevelDesign.Instance.difficultDesign.difficultLevel, 0, specialEnemyChance)))
+		if (LevelDesign.Instance.difficultDesign.difficultLevel >= 2 && BetterRandom.GetBool(Mathf.Clamp(specialEnemyChance - LevelDesign.Instance.difficultDesign.difficultLevel, 0, specialEnemyChance)))
 		{
 			SpawnSpecialEnemy(monsterController);
 		}

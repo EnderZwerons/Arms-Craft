@@ -284,8 +284,8 @@ public class FPSController : MonoBehaviour
 		}
 		else if (PCControls.CursorLocked)
 		{
-			InputX = (Input.GetAxis("Mouse X") * (sensitivityX * Sensitivity * 0.01f) / FPSControl.DPI) * 0.03f;
-			InputY = (Input.GetAxis("Mouse Y") * (sensitivityY * Sensitivity * 0.01f) / FPSControl.DPI) * 0.03f;
+			InputX = Input.GetAxisRaw("Mouse X") * (sensitivityX * Sensitivity * 0.01f) / FPSControl.DPI * 0.03f;
+			InputY = Input.GetAxisRaw("Mouse Y") * (sensitivityY * Sensitivity * 0.01f) / FPSControl.DPI * 0.03f;
 		}
 		rotationX += InputX;
 		rotationY += InputY;

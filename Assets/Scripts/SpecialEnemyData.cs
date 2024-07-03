@@ -24,7 +24,7 @@ public class SpecialEnemyData
         {SPECIALENEMY.VERYFAST, new EnemyData(0.5f, 0.75f, 5f, 3.5f, 5f, 1.1f, 1.5f, 1.25f, 0.9f)},
         {SPECIALENEMY.VERYTOUGH, new EnemyData(2.5f, 2f, 1.2f, 0.5f, 1f, 1.2f, 2f, 1.75f, 1.15f)},
         {SPECIALENEMY.VERYSTRONG, new EnemyData(1.75f, 3f, 2f, 1.75f, 3f, 1.5f, 2.5f, 2f, 1.2f)},
-        {SPECIALENEMY.BOSS, new EnemyData(5f, 3f, 1.2f, 0.7f, 4f, 5f, 1.5f, 3f, 1.5f)},
+        {SPECIALENEMY.BOSS, new EnemyData(5f, 3f, 1.2f, 0.7f, 4f, 2f, 1.5f, 3f, 1.5f)},
         {SPECIALENEMY.MEGABOSS, new EnemyData(10f, 5f, 1.3f, 0.575f, 10f, 2f, 10f, 7.5f, 2f)}
     };
 
